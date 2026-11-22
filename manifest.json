@@ -1,0 +1,13 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "آله حاسبه",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "حاسبتي",
+  "start_url": "/",
+  "theme_color": "#8723e5",
+  "id": "calculator-app",
+  "description": "تطبيق آلة حاسبة سهل وسريع لإجراء العمليات الحسابية"
+}
