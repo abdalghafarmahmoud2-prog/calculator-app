@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Calculator</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;display:flex;
+align-items:center;justify-content:center;
+font-family:Arial;background:linear-gradient(135deg,#fbc2eb,#a18cd1);
+}
+.calculator{
+width:330px;padding:22px;border-radius:30px;
+background:#ffffffdf;
+box-shadow:0 20px 50px #6d397755;
+}
+h2{text-align:center;color:#9b59a4}
+#screen{
+width:100%;height:85px;border:0;border-radius:18px;
+background:#f8eafa;margin-bottom:18px;
+padding:15px;font-size:28px;text-align:left;
+color:#75427d;outline:none;
+}
+.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+button{
+height:60px;border:0;border-radius:17px;
+font-size:21px;background:#f6e4f6;
+color:#824b8a;cursor:pointer;
+}
+button:active{transform:scale(.94)}
+.operator{background:#e9c5ed}
+.equal{background:#b779c4;color:white}
+.clear{background:#f3a9c5;color:white}
+#message{text-align:center;font-size:21px;font-weight:bold;color:#a04491;margin-top:15px;min-height:28px}
+</style>
+</head>
+<body>
+<div class="calculator">
+<h2>♡ Calculator ♡</h2>
+<input id="screen" readonly placeholder="0">
+<div class="buttons">
+<button class="clear" onclick="clearScreen()">C</button>
+<button onclick="del()">⌫</button>
+<button class="operator" onclick="add('%')">%</button>
+<button class="operator" onclick="add('/')">÷</button>
+<button onclick="add('7')">7</button>
+<button onclick="add('8')">8</button>
+<button onclick="add('9')">9</button>
+<button class="operator" onclick="add('*')">×</button>
+<button onclick="add('4')">4</button>
+<button onclick="add('5')">5</button>
+<button onclick="add('6')">6</button>
+<button class="operator" onclick="add('-')">−</button>
+<button onclick="add('1')">1</button>
+<button onclick="add('2')">2</button>
+<button onclick="add('3')">3</button>
+<button class="operator" onclick="add('+')">+</button>
+<button onclick="add('0')">0</button>
+<button onclick="add('.')">.</button>
+<button class="equal" style="grid-column:span 2" onclick="calculate()">=</button>
+</div>
+<div id="message"></div>
+</div>
+<script>
+const screen=document.getElementById('screen');
+const message=document.getElementById('message');
+function add(v){screen.value+=v;message.innerText=''}
+function clearScreen(){screen.value='';message.innerText=''}
+function del(){screen.value=screen.value.slice(0,-1)}
+function calculate(){
+let expression=screen.value.replace(/÷/g,'/');
+if(expression.replace(/\s/g,'')==='2/1'){
+screen.value='2/1';
+message.innerText='مش رجولة 😂❤️';
+return;
+}
+try{
+if(!/^[0-9+\-*/%.() ]+$/.test(expression))throw Error();
+let result=Function('"use strict";return ('+expression+')')();
+if(!Number.isFinite(result))throw Error();
+screen.value=result;message.innerText='';
+}catch(e){message.innerText='عملية غير صحيحة'}
+}
+</script>
+</body>
+</html>
